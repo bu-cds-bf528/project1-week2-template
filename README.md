@@ -57,12 +57,13 @@ If you look in the `nextflow.config` file, you'll notice that we also have
 `conda` and `cluster` profiles defined, corresponding to the SCC and the
 qsub-based job submission we discussed in lab. This week's processes are
 significantly more resource intensive than last week's, so once you are
-confident your pipeline is wired correctly via repeated `-stub` runs, and
-only once your instructor tells you to do so, you would run for real with:
+confident your pipeline is wired correctly via repeated `-stub` runs, you would run for real with:
 
 ```bash
 nextflow run week2.nf -profile cluster,conda
 ```
+
+**Only use this when asked - this is just an example**
 
 This submits each process as a separate job to the SCC and may take
 considerably longer as jobs wait in the queue. For this week's tasks,
