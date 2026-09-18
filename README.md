@@ -38,10 +38,6 @@ flowchart TD
 
     PILON --> POLISHED["Polished genome assembly"]
     FASTQC --> QCREPORT["Short-read QC report"]
-
-    POLISHED --> BUSCO["BUSCO<br/>completeness of polished assembly"]
-    FLYE --> QUAST["QUAST<br/>compare draft vs. polished assembly"]
-    POLISHED --> QUAST
 ```
 
 ## Relevant Resources
