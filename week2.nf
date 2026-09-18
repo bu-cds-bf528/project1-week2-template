@@ -160,9 +160,12 @@ workflow {
     // below to finish the workflow.
     // - Build a genome index from the assembled genome (assembly_ch) using
     //   BOWTIE2_INDEX.
+
     // - Build a channel of ShortReads records from read_pairs_ch and align
     //   them to that index with BOWTIE2_ALIGN using `map` and `record`
+
     // - Sort and index the resulting alignment with SAMTOOLS_SORT.
+    
     // - Polish the assembly with PILON, using the original assembly_ch and
     //   the sorted, indexed alignment.
     //
