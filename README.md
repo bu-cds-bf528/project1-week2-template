@@ -13,6 +13,37 @@ the illumina reads to the draft assembly using bowtie2. We can then sort the
 aligned reads and provide them to Pilon to polish the assembly and fix any
 potential errors.
 
+## Diagram of our pipeline
+
+```mermaid
+flowchart TD
+    CSV["Samplesheet CSV<br/>name, long_reads, short1, short2"]
+
+    CSV --> LONG["Long reads"]
+    CSV --> SHORT["Short reads (R1 + R2)"]
+
+    SHORT --> FASTQC["FASTQC<br/>QC report on raw short reads"]
+
+    LONG --> FILTLONGER["FILTLONGER<br/>filter long reads"]
+    FILTLONGER --> FLYE["FLYE<br/>draft genome assembly"]
+
+    FLYE --> BOWTIE2_INDEX["BOWTIE2_INDEX<br/>index draft assembly"]
+    SHORT --> BOWTIE2_ALIGN["BOWTIE2_ALIGN<br/>align short reads to draft assembly"]
+    BOWTIE2_INDEX --> BOWTIE2_ALIGN
+
+    BOWTIE2_ALIGN --> SAMTOOLS_SORT["SAMTOOLS_SORT<br/>sort + index alignment"]
+
+    FLYE --> PILON["PILON<br/>polish draft assembly"]
+    SAMTOOLS_SORT --> PILON
+
+    PILON --> POLISHED["Polished genome assembly"]
+    FASTQC --> QCREPORT["Short-read QC report"]
+
+    POLISHED --> BUSCO["BUSCO<br/>completeness of polished assembly"]
+    FLYE --> QUAST["QUAST<br/>compare draft vs. polished assembly"]
+    POLISHED --> QUAST
+```
+
 ## Relevant Resources
 
 - Requesting SCC Resources
